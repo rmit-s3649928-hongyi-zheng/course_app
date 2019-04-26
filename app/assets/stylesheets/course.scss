@@ -1,0 +1,36 @@
+// Place all the styles related to the Course controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#topDiv{
+    background:grey;
+    height:200px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#row1{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-around;
+}
+
+
+#column1{
+    display:flex;
+    flex-direction:column;
+   
+}
+
+#buttonGreen{
+    background:green;
+    white-space: normal;
+    word-wrap: break-word;
+    max-width:200px;
+}
+
+
+#column2{
+    display:flex;
+    flex-direction:column;
+}
