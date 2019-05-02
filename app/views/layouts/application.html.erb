@@ -6,23 +6,64 @@
     <%= stylesheet_link_tag    'application', media: 'all',
                                               'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   </head>
 
+  
   <body>
      <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
         <nav>
+          <%= link_to "COURSE" ,course_home_url,class:"nav navbar-nav navbar-left btn btn-default" %>
           <ul class="nav navbar-nav navbar-right">
-          <li>"Home"</li>
-          <li>"Help"</li>
-          <li>"Log in"</li>
-          <li>"About"</li>
+          <li>
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Category<span class="caret"></span></button>
+                 <ul class="dropdown-menu">
+                    <% @categories.each do |category| %>
+                    <li><a><%= link_to category.name ,course_course_detail_path(:category_id => category.id) %></a></li>
+                    <% end %>
+                 </ul>
+            </div>
+          </li>
+          <li>
+            <div class="dropdown">
+                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Location<span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <% @locations.each do |location| %>
+                    <li><a><%= link_to location.name ,course_course_detail_path(:location_id => location.id) %></a></li>
+                    <% end %>
+                   </ul>
+            </div>
+          </li>
+          <li>
+          <% if logged_in? %>
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+              Account <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a><%= link_to "Profile", current_user %></a></li>
+              <li class="divider"></li>
+              <li>
+                <a><%= link_to "Log out", logout_path, method: :delete %></a>
+              </li>
+            </ul>
+
+        <% else %>
+           <%= link_to "Log in", login_path ,class:"btn btn-default"%>
+        <% end %>
+           </li>
           </ul>
         </nav>
       </div>
     </header>
     <div class="container">
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
       <%= yield %>
     </div>
   </body>
+  
+  <%= render 'layouts/footer' %>
 </html>

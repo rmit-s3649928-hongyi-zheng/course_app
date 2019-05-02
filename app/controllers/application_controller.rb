@@ -4,4 +4,14 @@ class ApplicationController < ActionController::Base
   def hello
     render html: "hello, world!"
   end
+  
+  before_action :set_categories_and_locations
+
+  def set_categories_and_locations
+    @categories =  Category.all
+    @locations = Location.all
+  end
+  
+  include SessionsHelper
+  
 end

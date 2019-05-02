@@ -1,0 +1,36 @@
+<div class = "topDiv2">
+    <h1>
+        All courses
+    </h1>
+</div>
+  
+<div id="coursetable">
+    <p> <%= link_to"Courses", course_course_detail_path%> | <%= link_to"Coordinators", course_coordinator_detail_path%>
+</p> 
+
+<hr>
+    <% @courses.each do |course| %>
+<div class="courserow">
+<div class="coordinatordescription">
+   <%= course.coordinator.name %>
+</div>
+
+<div class="coursedescription">
+<div class="descriptiontext">
+    <b>Course name:</b><%= course.name %><br>
+    <b>Category:</b><%= course.category.name %> <br>
+    <b>Prerequisite:</b><%= course.prerequisite %><br>
+    <b>Locations:</b>
+    <% for location in course.locations do %> 
+    <%= location.building %>.<%= location.floor %>.<%= location.room%> <% end %><br>
+    <b>Created at:</b><%= time_ago_in_words(course.created_at) %> Ago<br>
+</div>
+</div>
+</div>
+<% end %>
+</div>
+  
+  
+  
+
+</div>

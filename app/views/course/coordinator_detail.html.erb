@@ -1,0 +1,19 @@
+<div class = "topDiv2">
+    <h1>
+        All coordinators
+    </h1>
+</div>
+
+<div id="coursetable">
+    <p> <%= link_to"Courses", course_course_detail_path%> | <%= link_to"Coordinators", course_coordinator_detail_path%>
+</p> 
+
+<hr>
+ <% @coordinators.each do |coordinator| %>
+ <div class="courserow">
+ <div class = "coursedescription">
+     <b>Coordinator name:</b><%= coordinator.name %><br>
+ </div>
+ </div>
+ <% end %>
+ </div>

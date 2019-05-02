@@ -1,0 +1,36 @@
+<p id="notice">
+  <%= notice %>
+</p>
+
+<p> 
+<strong> Locations: </strong > 
+  <% if !@course.locations.empty? %> 
+    <%= @course.locations.collect{|l| link_to( l.name, l)}.join(",").html_safe%> 
+  <% else %> 
+      No locations added yet.
+  <% end %>
+</p> 
+
+<p>
+  <strong>Name:</strong>
+  <%= @course.name %>
+</p>
+
+<p>
+  <strong>Prerequisite:</strong>
+  <%= @course.prerequisite %>
+</p>
+
+<p>
+  <strong>Coordinator:</strong>
+  <%= @course.coordinator_id %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @course.category_id %>
+</p>
+
+<%= link_to 'Edit', edit_course_path(@course) %> |
+<%= link_to'Locations', locations_course_path(@course) %> |
+<%= link_to 'Back', courses_path %>
