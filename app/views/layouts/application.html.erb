@@ -11,14 +11,13 @@
 
   
   <body>
-     <header class="navbar navbar-fixed-top navbar-inverse">
+      <nav class="navbar navbar-fixed-top navbar-default">
       <div class="container">
-        <nav>
-          <%= link_to "COURSE" ,course_home_url,class:"nav navbar-nav navbar-left btn btn-default" %>
+          <%= link_to "COURSE" ,course_home_url,class:"navbar-left btn btn-info" %>
           <ul class="nav navbar-nav navbar-right">
           <li>
             <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Category<span class="caret"></span></button>
+                <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-record"></span>Category<span class="caret"></span></button>
                  <ul class="dropdown-menu">
                     <% @categories.each do |category| %>
                     <li><a><%= link_to category.name ,course_course_detail_path(:category_id => category.id) %></a></li>
@@ -28,7 +27,7 @@
           </li>
           <li>
             <div class="dropdown">
-                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Location<span class="caret"></span></button>
+                 <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-map-marker"></span>Location<span class="caret"></span></button>
                   <ul class="dropdown-menu">
                     <% @locations.each do |location| %>
                     <li><a><%= link_to location.name ,course_course_detail_path(:location_id => location.id) %></a></li>
@@ -37,8 +36,9 @@
             </div>
           </li>
           <li>
+            <div class="dropdown">
           <% if logged_in? %>
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+            <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">
               Account <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -48,15 +48,15 @@
                 <a><%= link_to "Log out", logout_path, method: :delete %></a>
               </li>
             </ul>
-
         <% else %>
-           <%= link_to "Log in", login_path ,class:"btn btn-default"%>
+            
+           <%= link_to "<span class = 'glyphicon glyphicon-user'></span>Log in".html_safe, login_path ,class:"navbar-right btn btn-info"%>
         <% end %>
+        </div>
            </li>
           </ul>
-        </nav>
       </div>
-    </header>
+    </nav>
     <div class="container">
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>

@@ -5,22 +5,22 @@
     Wlcome to your Course App
 </h1>
 <p>this is the home page for the RAD assignment 2</p>
-    <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-success small" %>
+    <%= link_to "<span class='glyphicon glyphicon-cog'></span>Sign up now!".html_safe, signup_path, class: "btn  btn-danger small" %>
 
 </div>
 
 <div id="row1">
 
 <div id="column1">
-<h2>View Course as Guest User</h2>
+<p class="t1">View Course as Guest User</p>
 <p>Browse and view all courses as a guest and sign up later</p>
-    <%= link_to "Browse all courses", course_course_detail_path ,class:"btn btn-lg btn-success small"%>
+    <%= link_to "<span class='glyphicon glyphicon-book'></span>Browse all courses".html_safe, course_course_detail_path ,class:"btn btn-success small"%>
 </div>
 
 <div id="column2">
-<h2>Sign in to your account</h2>
+<p class="t1">Sign in to your account</p>
 <p>Update your courses,rate courses,view coordinator informations</p>
-    <%= link_to "Log in to your account", login_path ,class:"btn btn-lg btn-success small"%>
+    <%= link_to "<span class='glyphicon glyphicon-user'></span>Log in to your account".html_safe, login_path ,class:"btn btn-success small"%>
 </div>
 
 </div>
