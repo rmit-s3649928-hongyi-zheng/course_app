@@ -28,7 +28,8 @@ class CoursesController < ApplicationController
     @course = current_user.courses.build(course_params)
     respond_to do |format|
       if @course.save
-        format.html { redirect_to course_course_detail_path, notice: 'Course was successfully created.' }
+        flash[:success] = 'Course was successfully created' 
+        format.html { redirect_to course_course_detail_path }
       else
         format.html { render :new }
         format.json { render json: @course.errors, status: :unprocessable_entity }
@@ -41,7 +42,8 @@ class CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        format.html { redirect_to course_course_detail_path, notice: 'Course was successfully updated.' }
+        flash[:success] = 'Course was successfully updated' 
+        format.html { redirect_to course_course_detail_path }
       else
         format.html { render :edit }
         format.json { render json: @course.errors, status: :unprocessable_entity }
@@ -54,7 +56,7 @@ class CoursesController < ApplicationController
   def destroy
     @course.destroy
     respond_to do |format|
-      format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
+      format.html { redirect_to courses_url, success: 'Course was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -73,7 +75,7 @@ class CoursesController < ApplicationController
       unless @course.assign_to?(@location)
       #add location to list using << operator 
          @course.locations<< @location 
-         flash[:notice] = 'Location was successfully added' 
+         flash[:success] = 'Location was successfully added' 
       else 
          flash[:error] = 'Location was already added' 
       end 
@@ -124,7 +126,7 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :prerequisite,:description,:user_id,:category_id,location_ids:[])
+      params.require(:course).permit(:name, :prerequisite,:description,:image,:user_id,:category_id,location_ids:[])
     end
     
     

@@ -12,8 +12,10 @@
 <% @courses.each do |course| %>
 <div class="courserow">
 <div class="coordinatordescription">
+   <div class ="coordinatordescriptiontext">
    <%= gravatar_for course.user %>
    <%= course.user.name %>
+   </div>
 </div>
 
 <div class="coursedescription">

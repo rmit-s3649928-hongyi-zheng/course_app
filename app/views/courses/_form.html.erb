@@ -31,9 +31,11 @@
     <%= form.select:category_id, Category.all.collect{|s| [( s.name), s.id]}%> 
   </div>
   
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :location_id %>
-    <%= collection_check_boxes(:course,:location_ids, Location.all, :id, :name) %>
+    <div class = "checkbox-inline">
+    <%= collection_check_boxes(:course,:location_ids, Location.all, :id, :name,item_wrapper_class: 'custom-control custom-control-inline') %>
+    </div>
   </div>
   
   <div class="field">
