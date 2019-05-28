@@ -5,7 +5,11 @@ class Course < ApplicationRecord
     has_many :votes, dependent: :destroy
     has_many :voted_users, through: :votes, source: :user
     
-    validates :name,  presence: true
+    validates :name,  presence: true,length:{minimum:10}
+    validates :prerequisite ,  presence: true,  length:{minimum:10}
+    validates :description ,  presence: true,  length:{minimum:30}
+    
+    mount_uploader :image, ImageUploader
     
     def assign_to?(location) 
         self.locations.include?(location) 

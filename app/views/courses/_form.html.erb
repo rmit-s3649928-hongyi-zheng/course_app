@@ -20,6 +20,11 @@
     <%= form.label :prerequisite %>
     <%= form.text_field :prerequisite, id: :course_prerequisite %>
   </div>
+  
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :course_description,size:200 %>
+  </div>  
 
   <div class="field">
     <%= form.label :category_id %>
@@ -29,6 +34,11 @@
   <div class="field">
     <%= form.label :location_id %>
     <%= collection_check_boxes(:course,:location_ids, Location.all, :id, :name) %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :image %><br>
+    <%= form.file_field :image %>
   </div>
 
   <div class="actions">
