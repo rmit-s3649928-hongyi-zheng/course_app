@@ -9,27 +9,7 @@
 </p> 
 
 <hr>
-    <% @courses.each do |course| %>
-<div class="courserow">
-<div class="coordinatordescription">
-   <%= course.coordinator.name %>
-</div>
-
-<div class="coursedescription">
-<div class="descriptiontext">
-    <b>Course name:</b><%= course.name %><br>
-    <b>Category:</b>
-    <%= link_to course.category.name ,course_course_detail_path(:category_id => course.category.id) %><br>
-    <b>Prerequisite:</b><%= course.prerequisite %><br>
-    <b>Locations:</b>
-    <% for location in course.locations do %> 
-    <%= link_to location.name ,course_course_detail_path(:location_id => location.id) %> <% end %><br>
-    <b>Created at:</b><%= time_ago_in_words(course.created_at) %> Ago<br><br>
-    <span class="glyphicon glyphicon-thumbs-up"></span><span class="glyphicon glyphicon-thumbs-down"></span>
-</div>
-</div>
-</div>
-<% end %>
+    <%= render 'shared/course_table',object:@courses%>
 </div>
   
   

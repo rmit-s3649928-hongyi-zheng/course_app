@@ -14,6 +14,7 @@ class CoursesController < ApplicationController
 
   # GET /courses/new
   def new
+    @locations = Location.all
     @course = Course.new
   end
 
@@ -24,11 +25,10 @@ class CoursesController < ApplicationController
   # POST /courses
   # POST /courses.json
   def create
-    @course = Course.new(course_params)
-
+    @course = current_user.courses.build(course_params)
     respond_to do |format|
       if @course.save
-        format.html { redirect_to @course, notice: 'Course was successfully created.' }
+        format.html { redirect_to course_course_detail_path, notice: 'Course was successfully created.' }
         format.json { render :show, status: :created, location: @course }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        format.html { redirect_to @course, notice: 'Course was successfully updated.' }
+        format.html { redirect_to course_course_detail_path, notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
       else
         format.html { render :edit }
@@ -99,6 +99,24 @@ class CoursesController < ApplicationController
       end
         redirect_to action: "locations", id: @course
     end
+    
+    def vote
+      @course = Course.find(params[:id])
+      @vote = @course.votes.create(user_id: current_user.id,kind:1)
+      if @vote.save
+        flash.now[:success] = "thanks for voting!"
+      else
+        flash.now[:danger] = "Error!You have already voted!"
+      end
+      redirect_to(course_course_detail_path)
+
+    end
+    
+    def down_vote
+      @course = Course.find(params[:id])
+      @course.votes.create(user_id: current_user.id,kind:-1)
+      redirect_to(course_course_detail_path)
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -108,8 +126,11 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :prerequisite,:coordinator_id,:category_id)
+      params.require(:course).permit(:name, :prerequisite,:user_id,:category_id,location_ids:[])
     end
+    
+    
+    
     
 
 end

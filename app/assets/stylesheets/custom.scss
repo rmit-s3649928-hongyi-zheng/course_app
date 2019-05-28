@@ -73,13 +73,14 @@ footer {
 #coursetable{
     width:80%;
     height:auto;
-    margin:auto;
+    margin-top:10px;
 }
 .courserow{
     border:1px solid #e57614;
     display: -webkit-flex;
     display: flex;
     width:100%;
+    margin-top:10px;
     margin-bottom:10px;
     height:150px;
 }
@@ -163,3 +164,17 @@ h1{
     margin:auto;
 }
 
+.iconRow
+{
+    display: table;
+    width: 30%;
+    margin-left:60%;
+}
+.iconColumn
+{
+    display: table-cell;
+}
+
+.gravatar_edit{
+    margin-top:10px;
+}

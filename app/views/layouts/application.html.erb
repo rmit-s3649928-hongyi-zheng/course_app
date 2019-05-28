@@ -13,7 +13,11 @@
   <body>
       <nav class="navbar navbar-fixed-top navbar-default">
       <div class="container">
+          <% if logged_in? %>
+          <%= link_to "COURSE" ,course_course_detail_path,class:"navbar-left btn btn-info" %>
+          <% else %>
           <%= link_to "COURSE" ,course_home_url,class:"navbar-left btn btn-info" %>
+          <% end %>
           <ul class="nav navbar-nav navbar-right">
           <li>
             <div class="dropdown">
@@ -21,6 +25,10 @@
                  <ul class="dropdown-menu">
                     <% @categories.each do |category| %>
                     <li><a><%= link_to category.name ,course_course_detail_path(:category_id => category.id) %></a></li>
+                    <% end %>
+                    <% if logged_in? %>
+                    <li class="divider"></li>
+                    <li><a><%= link_to 'create category' ,createcategory_path %></a></li>
                     <% end %>
                  </ul>
             </div>
@@ -32,9 +40,20 @@
                     <% @locations.each do |location| %>
                     <li><a><%= link_to location.name ,course_course_detail_path(:location_id => location.id) %></a></li>
                     <% end %>
+                    <% if logged_in? %>
+                    <li class="divider"></li>
+                    <li><a><%= link_to 'create location' ,createlocation_path %></a></li>
+                    <% end %>
                    </ul>
             </div>
           </li>
+          <% if logged_in? %>
+          <li>
+            <div class="dropdown">
+            <%= link_to "NEW COURSE" ,createcourse_path,class:"btn btn-info" %>
+            </div>
+          </li>
+          <% end %>
           <li>
             <div class="dropdown">
           <% if logged_in? %>
@@ -43,6 +62,7 @@
             </button>
             <ul class="dropdown-menu">
               <li><a><%= link_to "Profile", current_user %></a></li>
+              <li><%= link_to "Settings", edit_user_path(current_user) %></li>
               <li class="divider"></li>
               <li>
                 <a><%= link_to "Log out", logout_path, method: :delete %></a>

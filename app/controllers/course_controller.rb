@@ -16,7 +16,7 @@ class CourseController < ApplicationController
   end
   
   def coordinator_detail
-    @coordinators = Coordinator.all
+    @users = User.all
   end
   
 end

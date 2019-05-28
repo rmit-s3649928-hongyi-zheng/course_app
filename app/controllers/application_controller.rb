@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
     @locations = Location.all
   end
   
+  include UsersHelper
   include SessionsHelper
   
 end

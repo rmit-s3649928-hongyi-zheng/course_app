@@ -9,10 +9,11 @@
 </p> 
 
 <hr>
- <% @coordinators.each do |coordinator| %>
+ <% @users.each do |user| %>
  <div class="courserow">
  <div class = "coordinatordescriptiontext">
-     <b>Coordinator name:</b><%= coordinator.name %><br>
+     <%= gravatar_for user %>
+     <b>Coordinator name:</b><%= user.name %><br>
  </div>
  </div>
  <% end %>

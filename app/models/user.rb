@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_many:courses
+  has_many :votes, dependent: :destroy
+  has_many :upvoted_courses, through: :votes, source: :course
   validates :name,  presence: true, length: { minimum: 4 }
   RMIT_EMAIL_REGEX = /[a-z]+\.[a-z]+@rmit\.edu\.au/i
   validates :email, presence: true, length: { minimum: 4 },
