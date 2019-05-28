@@ -67,38 +67,11 @@ class CoursesController < ApplicationController
       @locations = @course.locations
     end      
     
-    # POST /courses/1/location_add?location_id=2
-    def location_add
-      #Convert ids from routing to objects
+    def categories
       @course = Course.find(params[:id])
-      @location = Location.find(params[:location])
-      unless @course.assign_to?(@location)
-      #add location to list using << operator 
-         @course.locations<< @location 
-         flash[:success] = 'Location was successfully added' 
-      else 
-         flash[:error] = 'Location was already added' 
-      end 
-      redirect_to action: "locations", id: @course
-    end
+      @categories = @course.categories
+    end     
     
-    def location_remove
-      #Convert ids from routing to object 
-      @course = Course.find(params[:id]) 
-      #get list of locations to remove from query string
-      location_ids= params[:locations] 
-      if location_ids.any? 
-        location_ids.each do |location_id| 
-          location = Location.find(location_id) 
-          if @course.enrolled_in?(location)
-            logger.info"Removing location #{location.id} from course "
-            @course.locations.delete(location) 
-            flash[:notice] = 'Location was successfully deleted'
-          end 
-        end 
-      end
-        redirect_to action: "locations", id: @course
-    end
     
     def vote
       @course = Course.find(params[:id])
@@ -126,8 +99,9 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :prerequisite,:description,:image,:user_id,:category_id,location_ids:[])
+      params.require(:course).permit(:name, :prerequisite,:description,:image,:user_id,category_ids:[],location_ids:[])
     end
+    
     
     
     

@@ -1,6 +1,12 @@
 <div class = "topDiv2">
     <h1>
-        Courses
+        <% if @location %>
+        Location: <%= @location.name %>
+        <% elsif @category %>
+        Category: <%= @category.name %>
+        <% else %>
+        All Courses
+        <%end %>
     </h1>
 </div>
   
