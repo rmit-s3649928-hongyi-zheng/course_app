@@ -23,14 +23,8 @@ ActiveRecord::Schema.define(version: 20190528072948) do
     t.integer "category_id", null: false
   end
 
-  create_table "coordinators", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
 # Could not dump table "courses" because of following StandardError
-#   Unknown type '' for column 'description'
+#   Unknown type 'String' for column 'description'
 
   create_table "courses_locations", force: :cascade do |t|
     t.integer "course_id", null: false
