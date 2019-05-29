@@ -13,8 +13,13 @@ gem 'turbolinks',   '5.0.1'
 gem 'jbuilder',     '2.7.0'
 gem 'bcrypt' ,     '3.1.12'
 gem 'listen', '~> 3.1.5'
-gem 'sqlite3', '1.3.13'
+group :development, :test do
+  gem 'sqlite3'
+end
 
+group :production do
+  gem 'pg'
+end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

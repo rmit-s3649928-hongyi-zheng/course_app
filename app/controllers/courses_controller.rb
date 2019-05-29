@@ -73,22 +73,34 @@ class CoursesController < ApplicationController
     end     
     
     
-    def vote
+  def vote
+    if (current_user!= nil)
       @course = Course.find(params[:id])
       @vote = @course.votes.create(user_id: current_user.id,kind:1)
       if @vote.save
-        flash.now[:success] = "thanks for voting!"
+        flash[:success] = "thanks for voting!"
       else
-        flash.now[:danger] = "Error!You have already voted!"
+        flash[:danger] = "Error!You have already voted!"
       end
-      redirect_to(course_course_detail_path)
-
+    else
+      flash[:danger] = "you must login to vote"
     end
+    redirect_to(course_course_detail_path)
+  end
     
     def down_vote
+     if (current_user!= nil)
       @course = Course.find(params[:id])
-      @course.votes.create(user_id: current_user.id,kind:-1)
-      redirect_to(course_course_detail_path)
+      @vote = @course.votes.create(user_id: current_user.id,kind:-1)
+      if @vote.save
+        flash[:success] = "thanks for voting!"
+      else
+        flash[:danger] = "Error!You have already voted!"
+      end
+     else
+      flash[:danger] = "you must login to vote"
+     end
+    redirect_to(course_course_detail_path)
     end
 
   private
