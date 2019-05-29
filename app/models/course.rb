@@ -9,7 +9,7 @@ class Course < ApplicationRecord
     validates :prerequisite ,  presence: true,  length:{minimum:10}
     validates :description ,  presence: true,  length:{minimum:30}
     
-    mount_uploader :image
+    mount_uploader :image, ImageUploader
     
     
 end
