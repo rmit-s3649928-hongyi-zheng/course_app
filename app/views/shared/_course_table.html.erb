@@ -1,0 +1,49 @@
+<% @courses.each do |course| %>
+<div class="courserow">
+<div class="coordinatordescription">
+    <div class = "coordinatordescriptiontext">
+   <%= gravatar_for course.user %>
+   <%= course.user.name %>
+   </div>
+</div>
+
+<div class="coursedescription">
+<div class="descriptiontext">
+    <b>Course name:</b><%= course.name %><br>
+    <b>Category:</b>
+    <% for category in course.categories do %> 
+    <%= link_to category.name ,course_course_detail_path(:category_id => category.id) %>
+    <% end %>
+    <br>
+    <b>Prerequisite:</b><%= course.prerequisite %><br>
+    <b>Description:</b><br><%= course.description %><br>
+    <b>Locations:</b>
+    <% for location in course.locations do %> 
+    <%= link_to location.name ,course_course_detail_path(:location_id => location.id) %> <% end %><br>
+    <b>Created at:</b><%= time_ago_in_words(course.created_at) %> Ago<br><br>
+    
+    <div class = "iconRow">
+    <div class = "iconColumn">
+    <%= link_to '<span class="glyphicon glyphicon-thumbs-up"/>'.html_safe, vote_course_path(course), method: :post %>
+    </div>
+    <div class = "iconColumn">
+    <%= pluralize(course.votes.select {|a| a.kind == 1}.count,"") %>
+    </div>
+    <div class = "iconColumn">
+    <%= link_to '<span class="glyphicon glyphicon-thumbs-down"/>'.html_safe, down_vote_course_path(course), method: :post %>
+    </div>
+    <div class = "iconColumn">
+    <%= pluralize(course.votes.select {|a| a.kind == -1}.count,"") %>
+    </div>
+    
+    </div>
+    <% if course.user == current_user %>
+    <%= link_to ' edit course',edit_course_path(course)%>
+    <% end %>
+    
+    
+    
+</div>
+</div>
+</div>
+<% end %>
