@@ -9,9 +9,12 @@ test:
   database: my_database_test
   pool: 5
   timeout: 5000
-
+  
 production:
+  host: course-database.cbacagteikko.us-east-1.rds.amazonaws.com
+  database: course-database
   adapter: postgresql
-  database: my_database_production
-  pool: 5
-  timeout: 5000
+  encoding: unicode
+  port: 5432
+  username: postgres
+  password: SVpswAx7VJGMtU6jhpSJ
