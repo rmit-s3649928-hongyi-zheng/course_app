@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   get 'course/home'
+  get 'course/map'
   get 'course/course_detail'
   get 'course/coordinator_detail'
   get 'course/course_of_category'
