@@ -1,0 +1,61 @@
+<html>
+  <style>
+    #map{
+      margin-top:5%;
+      margin-bottom:5%;
+      height:400px;
+      width:100%;
+    }
+  </style>
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta charset="utf-8">
+ <div id="map"></div>
+
+  <script>
+    var map; 
+    var markerHodler;
+    var message;
+    
+    function initMap() {
+     
+        var centerOfMap = new google.maps.LatLng(-37.8068717725,144.970312785);
+     
+        var options = {
+          center: centerOfMap, 
+          zoom: 10
+        };
+     
+        map = new google.maps.Map(document.getElementById('map'), options);
+        
+        <% @locations.each do |location| %>
+           addMarker(<%= location.lat %>, <%= location.lng %>);
+           var message='';
+           <% location.courses.each do |course| %>
+               message = message + "<%= course.name %>" + "<br>";
+           <% end %>
+           addInfoWindow(markerHolder, <%= location.building %>,message);
+        <% end %>
+    }
+            
+    function addMarker(lat, lng) {
+          markerHolder = new google.maps.Marker({
+          position: new google.maps.LatLng(lat, lng),
+          map: map
+        });
+      }
+      
+      function addInfoWindow(marker, building,message) {
+            var buildingStr = "building:"+building.toString()+"<br>";
+            var infoWindow = new google.maps.InfoWindow({
+                content: buildingStr+message
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                infoWindow.open(map, marker);
+            });
+        }
+
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKKiKtpHhEkCbu7iKvO8nujJRMa-ipvTU&callback=initMap" async defer></script>
+  <script src="/dist/location-picker.min.js"></script>
+</html>
