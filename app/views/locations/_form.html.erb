@@ -92,7 +92,35 @@
             //Get the marker's location.
             markerLocation();
         });
-    }
+        
+        <% @locations.each do |location| %>
+               addMarker(<%= location.lat %>, <%= location.lng %>);
+               var message='';
+               <% location.courses.each do |course| %>
+                   message = message + "<%= course.name %>" + "<br>";
+               <% end %>
+               addInfoWindow(markerHolder, <%= location.building %>,message);
+            <% end %>
+        }
+                
+        function addMarker(lat, lng) {
+              markerHolder = new google.maps.Marker({
+              position: new google.maps.LatLng(lat, lng),
+              map: map
+            });
+          }
+          
+        function addInfoWindow(marker, building,message) {
+              var buildingStr = "building:"+building.toString()+"<br>";
+              var infoWindow = new google.maps.InfoWindow({
+                  content: buildingStr+message
+              });
+  
+              google.maps.event.addListener(marker, 'click', function () {
+                  infoWindow.open(map, marker);
+              });
+          }
+
             
     //This function will get the marker's current location and then add the lat/long
     //values to our textfields so that we can save the location.
