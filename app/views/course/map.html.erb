@@ -19,13 +19,18 @@
     function initMap() {
      
         var centerOfMap = new google.maps.LatLng(-37.8068717725,144.970312785);
-     
+        
         var options = {
           center: centerOfMap, 
-          zoom: 10
+          zoom: 16
         };
      
         map = new google.maps.Map(document.getElementById('map'), options);
+        var layer = new google.maps.KmlLayer({
+            url: "http://www.google.com/maps/d/kml?mid=1BWFmOvTmM1A1Lze0RUBk8JTiMQU",
+            map: map
+          })
+
         
         <% @locations.each do |location| %>
            addMarker(<%= location.lat %>, <%= location.lng %>);

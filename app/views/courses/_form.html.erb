@@ -39,11 +39,6 @@
     <%= collection_check_boxes(:course,:location_ids, Location.all, :id, :name,item_wrapper_class: 'custom-control custom-control-inline') %>
     </div>
   </div>
-  
-  <div class="field">
-    <%= form.label :image %><br>
-    <%= form.file_field :image %>
-  </div>
 
   <div class="actions">
     <%= form.submit %>

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   get 'course/home'
   get 'course/map'
+  get 'course/rating'
   get 'course/course_detail'
   get 'course/coordinator_detail'
   get 'course/course_of_category'

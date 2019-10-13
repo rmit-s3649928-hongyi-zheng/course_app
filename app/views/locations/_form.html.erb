@@ -51,14 +51,11 @@
 
   
   <script>
-    var map; //Will contain map object.
-    var marker = false; ////Has the user plotted their location marker? 
+    var map; 
+    var marker = false; 
             
-    //Function called to initialize / create the map.
-    //This is called when the page has loaded.
     function initMap() {
      
-        //The center location of our map.
         var centerOfMap = new google.maps.LatLng(-37.8068717725,144.970312785);
      
         //Map options.
@@ -67,9 +64,11 @@
           zoom: 20 //The zoom value.
         };
      
-        //Create the map object.
         map = new google.maps.Map(document.getElementById('map'), options);
-     
+        var layer = new google.maps.KmlLayer({
+            url: "http://www.google.com/maps/d/kml?mid=1BWFmOvTmM1A1Lze0RUBk8JTiMQU",
+            map: map
+          })
         //Listen for any clicks on the map.
         google.maps.event.addListener(map, 'click', function(event) {                
             //Get the location that the user clicked.
